@@ -81,7 +81,6 @@ class BinarySearchTree:
             return
 
         for val in list:
-            print(self.to_list())
             self.add_node(val)
 
 
