@@ -1,5 +1,6 @@
 #파이썬 알고리즘 인터뷰
-import re
+import re #p151
+import collections #p151
 
 def p148(logs):
     #로그파일 재정렬
@@ -48,14 +49,38 @@ def p151(paragraph, banned):
         return most_frequent_key(counts)
     
     def book_solution():
-        pass
+        words = [word for word in re.sub('[^\w]', ' ', paragraph).lower().split() if word not in banned]
+        return collections.Counter(words).most_common(1)[0][0]
+    #my_solution()
+    return book_solution()
 
 
 def p151_test():
     paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
     banned = ['hit']
-    print(p151(paragraph, banned))
+    result = p151(paragraph, banned)
+    print(result)
+
+def p153(words):
+    #애너그램
+    def groupified(word):
+        return "".join(sorted(list(word)))
+
+    groupped = {}
+    for word in words:
+        id = groupified(word)
+        if id in groupped.keys():
+            groupped[id].append(word)
+        else:
+            groupped[id] = [word]
+    return [value for value in groupped.values()]
+
+def p153_test():
+    words = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    result = p153(words)
+    print(result)
 
 if __name__ == "__main__":
     #p148_test()
-    p151_test()
+    #p151_test()
+    p153_test()
